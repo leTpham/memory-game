@@ -3,11 +3,16 @@
 /** Memory game: find matching pairs of cards and flip both of them. */
 
 const FOUND_MATCH_WAIT_MSECS = 1000;
+
 const COLORS = [
   "red", "blue", "green", "orange", "purple",
   "red", "blue", "green", "orange", "purple",
 ];
-let count = 0;
+
+let count = 0; //count how many cards are flipped at the moment
+
+let maxFlipped = false; //only allowing 2 cards flipped at a time
+
 const colors = shuffle(COLORS);
 
 createCards(colors);
@@ -41,7 +46,6 @@ function shuffle(items) {
  function createCards(colors) {
   const gameBoard = document.getElementById("game");
   for (let color of colors) {
-    // missing code here ...
     let newDiv = document.createElement("div");
     newDiv.className = color;
     newDiv.addEventListener("click", handleCardClick);
@@ -55,8 +59,6 @@ function flipCard(card) {
   // ... you need to write this ...
   card.style.backgroundColor = card.className;
   count++;
-  console.log("IM FLIPPING")
-
   card.setAttribute("name", "flipped");
 }
 
@@ -65,7 +67,7 @@ function flipCard(card) {
 function unFlipCard(card) {
   // ... you need to write this ...
   card.style.backgroundColor = "";
-  card.removeAttribute("name");
+  card.removeAttribute("name"); //removing it from the set of flippedCards
 }
 
 /** Handle clicking on a card: this could be first-card or second-card. */
@@ -74,38 +76,42 @@ function handleCardClick(evt) {
   // ... you need to write this ...
   
   let card = evt.target;
-  if (card.getAttribute("name") === "flipped" || card.getAttribute("name") === "matched"){
+  //only works if card is not already flipped, or already matched, or there aren't 2 cards already flipped in the game
+  if (card.getAttribute("name") === "flipped" 
+  || card.getAttribute("name") === "matched" 
+  || maxFlipped){
     return;
   }
+ 
   flipCard(card);
-  console.log (count);
+
   if (count === 2) {
+    maxFlipped = true; //preventing from clicking other cards at the time
     checkMatch();
   }
 }
   
 function checkMatch(){
-  console.log ("I'm checking!")
-  let flippedCards = document.getElementsByName("flipped");
-  console.log(flippedCards);
+  let flippedCards = document.getElementsByName("flipped"); 
+
   if (flippedCards[0].className === flippedCards[1].className){
-    console.log("these are matching");
-    count = 0;
+    count = 0; //reset flipped cards to 0 since these two are flipped but out of the game
+    setTimeout(function(){
+      maxFlipped = false;
+    }, FOUND_MATCH_WAIT_MSECS); //buffer time after matched pair to keep playing
+    
+    //change names of matched cards to remove it from set of flippedCards
     flippedCards[1].setAttribute("name","matched");
     flippedCards[0].setAttribute("name","matched");
-    console.log(flippedCards);
   }
   else {
-  console.log("not matching");
-  console.log(flippedCards[0]);
-  console.log(flippedCards[1]);
-  console.log(flippedCards);
   setTimeout(function(){
-    unFlipCard(flippedCards[1]);
+    unFlipCard(flippedCards[1]); 
     unFlipCard(flippedCards[0]);
-  }, 1000);
-  
-  count = 0;
+    maxFlipped = false; //buffer time 
+  }, FOUND_MATCH_WAIT_MSECS);
+
+  count = 0; //since we're unflipping these 2 cards
   }
 
 }
