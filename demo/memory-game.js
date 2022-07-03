@@ -7,7 +7,7 @@ const COLORS = [
   "red", "blue", "green", "orange", "purple",
   "red", "blue", "green", "orange", "purple",
 ];
-
+let count = 0;
 const colors = shuffle(COLORS);
 
 createCards(colors);
@@ -38,25 +38,25 @@ function shuffle(items) {
  * - a class with the value of the color
  * - a click event listener for each card to handleCardClick
  */
-function createCards(colors) {
+ function createCards(colors) {
   const gameBoard = document.getElementById("game");
-  let html = "";
   for (let color of colors) {
     // missing code here ...
-    
-    html += 
-      "<div class =\""+ color + "\">"+
-       "</div>"
+    let newDiv = document.createElement("div");
+    newDiv.className = color;
+    newDiv.addEventListener("click", handleCardClick);
+    gameBoard.appendChild(newDiv);
+    }
   }
-  gameBoard.innerHTML = html
-  gameBoard.addEventListener("click", handleCardClick);
-}
 
 /** Flip a card face-up. */
 
 function flipCard(card) {
   // ... you need to write this ...
   card.style.backgroundColor = card.className;
+  count++;
+  console.log("IM FLIPPING")
+
   card.setAttribute("name", "flipped");
 }
 
@@ -72,43 +72,41 @@ function unFlipCard(card) {
 
 function handleCardClick(evt) {
   // ... you need to write this ...
-  let card = evt.target;
-  if (card.getAttribute("name") !== "matched"){
-    if (card.style.backgroundColor !== card.className){
-    flipCard(card);
-  }
-}
-  checkMatch()
-  /* else {
-    for (let card of document.querySelectorAll('[name]')){
-      unFlipCard(card);
-    }
-  } */
-
-}
-
-function checkMatch(){
-  console.log ("checking for match");
-  let flippedCards = document.querySelectorAll('[name="flipped"]');
-  if (flippedCards.length === 2){
-    
-      if (flippedCards[0].className === flippedCards[1].className){
-        for (let card of flippedCards){
-          card.removeAttribute("name");
-          card.setAttribute("name","matched")
-          console.log("MMMMATTHHCED");
-        }
-        console.log (flippedCards);
-      }
-      else{
-        console.log("not matching");
-        for (let card of flippedCards){
-          console
-          flipCard(card);
-          setTimeout(unFlipCard(card), 1000);
-
-        }
-      }
-    }
-  }
   
+  let card = evt.target;
+  if (card.getAttribute("name") === "flipped" || card.getAttribute("name") === "matched"){
+    return;
+  }
+  flipCard(card);
+  console.log (count);
+  if (count === 2) {
+    checkMatch();
+  }
+}
+  
+function checkMatch(){
+  console.log ("I'm checking!")
+  let flippedCards = document.getElementsByName("flipped");
+  console.log(flippedCards);
+  if (flippedCards[0].className === flippedCards[1].className){
+    console.log("these are matching");
+    count = 0;
+    flippedCards[1].setAttribute("name","matched");
+    flippedCards[0].setAttribute("name","matched");
+    console.log(flippedCards);
+  }
+  else {
+  console.log("not matching");
+  console.log(flippedCards[0]);
+  console.log(flippedCards[1]);
+  console.log(flippedCards);
+  setTimeout(function(){
+    unFlipCard(flippedCards[1]);
+    unFlipCard(flippedCards[0]);
+  }, 1000);
+  
+  count = 0;
+  }
+
+}
+
