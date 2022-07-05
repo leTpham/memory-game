@@ -4,18 +4,23 @@
 
 const FOUND_MATCH_WAIT_MSECS = 1000;
 
-const COLORS = [
-  "red", "blue", "green", "orange", "purple",
-  "red", "blue", "green", "orange", "purple",
+const IMAGES = [
+   "url(images/cry.jpg)", "url(images/cry.jpg)",
+   "url(images/feline-lawyer.jpg)", "url(images/feline-lawyer.jpg)",
+   "url(images/Smiling-Cat.jpg)", "url(images/Smiling-Cat.jpg)",
+   "url(images/salad-cat.jpeg)", "url(images/salad-cat.jpeg)",
+   "url(images/cheeseburgermeme.jpg)", "url(images/cheeseburgermeme.jpg)" 
 ];
 
 let count = 0; //count how many cards are flipped at the moment
 
+let score = document.getElementById("score");
+
 let maxFlipped = false; //only allowing 2 cards flipped at a time
 
-const colors = shuffle(COLORS);
+const images = shuffle(IMAGES);
 
-createCards(colors);
+createCards(images);
 
 
 /** Shuffle array items in-place and return shuffled array. */
@@ -43,11 +48,11 @@ function shuffle(items) {
  * - a class with the value of the color
  * - a click event listener for each card to handleCardClick
  */
- function createCards(colors) {
+ function createCards(images) {
   const gameBoard = document.getElementById("game");
-  for (let color of colors) {
+  for (let image of images) {
     let newDiv = document.createElement("div");
-    newDiv.className = color;
+    newDiv.className = image;
     newDiv.addEventListener("click", handleCardClick);
     gameBoard.appendChild(newDiv);
     }
@@ -57,7 +62,7 @@ function shuffle(items) {
 
 function flipCard(card) {
   // ... you need to write this ...
-  card.style.backgroundColor = card.className;
+  card.style.backgroundImage = card.className;
   count++;
   card.setAttribute("name", "flipped");
 }
@@ -66,7 +71,7 @@ function flipCard(card) {
 
 function unFlipCard(card) {
   // ... you need to write this ...
-  card.style.backgroundColor = "";
+  card.style.backgroundImage = "";
   card.removeAttribute("name"); //removing it from the set of flippedCards
 }
 
@@ -113,6 +118,20 @@ function checkMatch(){
 
   count = 0; //since we're unflipping these 2 cards
   }
+  displayScore()
 
 }
+
+function displayScore(){
+  let matches = document.getElementsByName("matched");
+  let left = 5 - (matches.length/2);
+  score.innerHTML = left;
+  if (left === 0) {
+    score.style.fontSize = "70px"; 
+    score.innerHTML = "Cong-🐀-s!" 
+    document.getElementsByTagName("body").style.backgroundImage = "url(cat-space.gif)";
+    }
+}
+
+displayScore()
 

@@ -1,12 +1,33 @@
 /* you can add to or change this. */
+body {
+  margin: 30px 30px;
+  background-color: beige;
+  background-size: contain;
+}
 
 #game div {
-  border: 1px solid black;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 150px;
   margin: 20px;
   display: inline-block;
   background-color: black;
+  background-image: url("images/grumpy-cat.jpeg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 10px 5px rgba(1, 1, 1, 0.688);
 }
 
+#game div:hover {
+  box-shadow: 0 0 10px 5px rgba(1, 1, 1, 0.499);
+}
+
+h1, #score {
+  font-family: 'Slackey', cursive;
+  font-size: 60px;
+  text-align: center;
+}
+
+#score {
+  color: rgb(223, 65, 47);
+}
 
