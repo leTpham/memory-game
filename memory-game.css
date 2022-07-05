@@ -2,7 +2,8 @@
 body {
   margin: 30px 30px;
   background-color: beige;
-  background-size: contain;
+  background-size:auto;
+  
 }
 
 #game div {
@@ -14,7 +15,7 @@ body {
   background-image: url("images/grumpy-cat.jpeg");
   background-size: cover;
   background-position: center;
-  box-shadow: 0 0 10px 5px rgba(1, 1, 1, 0.688);
+  box-shadow: 0 0 10px 5px rgba(1, 1, 1, 0.688);  
 }
 
 #game div:hover {
@@ -25,9 +26,32 @@ h1, #score {
   font-family: 'Slackey', cursive;
   font-size: 60px;
   text-align: center;
+  text-shadow:1px 1px 10px rgb(236, 197, 197), 1px 1px 10px #ccc;
 }
 
 #score {
   color: rgb(223, 65, 47);
+  text-shadow:1px 1px 10px rgb(21, 18, 16), 1px 1px 10px rgb(216, 177, 177);
+  margin: 20px 20px;
+  
 }
+
+#button {
+  display: block;
+  visibility: visible;
+  margin: auto;
+  margin-top: 40px;
+  height: 80px;
+  width: auto;
+  font-size: 20px;
+  font-family: 'Slackey', cursive;
+  border: rgba(245, 245, 245, 0.435) 2px solid;
+  background-color: aliceblue;
+  border-radius: 15px;
+  padding: 1px 10px;
+  box-shadow: 2px 2px rgba(245, 245, 245, 0.295)  ;
+
+}
+
+
 

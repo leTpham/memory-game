@@ -9,7 +9,8 @@ const IMAGES = [
    "url(images/feline-lawyer.jpg)", "url(images/feline-lawyer.jpg)",
    "url(images/Smiling-Cat.jpg)", "url(images/Smiling-Cat.jpg)",
    "url(images/salad-cat.jpeg)", "url(images/salad-cat.jpeg)",
-   "url(images/cheeseburgermeme.jpg)", "url(images/cheeseburgermeme.jpg)" 
+   "url(images/cheeseburgermeme.jpg)", "url(images/cheeseburgermeme.jpg)",
+   "url(images/cat-vibing.gif)",  "url(images/cat-vibing.gif)"
 ];
 
 let count = 0; //count how many cards are flipped at the moment
@@ -48,9 +49,9 @@ function shuffle(items) {
  * - a class with the value of the color
  * - a click event listener for each card to handleCardClick
  */
- function createCards(images) {
+ function createCards(IMAGES) {
   const gameBoard = document.getElementById("game");
-  for (let image of images) {
+  for (let image of IMAGES) {
     let newDiv = document.createElement("div");
     newDiv.className = image;
     newDiv.addEventListener("click", handleCardClick);
@@ -128,10 +129,21 @@ function displayScore(){
   score.innerHTML = left;
   if (left === 0) {
     score.style.fontSize = "70px"; 
-    score.innerHTML = "Cong-🐀-s!" 
-    document.getElementsByTagName("body").style.backgroundImage = "url(cat-space.gif)";
+    score.innerHTML = "You did it !!!" ;
+    document.body.style.backgroundImage = "url('cat-space.gif')";
+    
+    reset();
     }
 }
 
+function reset(){
+  let resetButton = document.getElementById("button");
+  resetButton.innerHTML = "Play again?"
+  resetButton.addEventListener("click", function(){location.reload()});
+  resetButton.style.visibility = "visible";
+}
+
 displayScore()
+
+
 
