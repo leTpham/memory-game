@@ -40,7 +40,7 @@ h1, #score {
 
 #button {
   display: block;
-  visibility: visible;
+  visibility: hidden;
   margin: auto;
   margin-top: 20px;
   height: 70px;
