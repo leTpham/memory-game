@@ -147,7 +147,6 @@ function displayScore(){
   score.innerHTML = left;
   if (left === 0) {
     score.style.fontSize = "50px"; 
-    score.innerHTML = "You did it !!!" ;
     document.body.style.backgroundImage = "url('cat-space.gif')";
     reset();
     }
@@ -155,9 +154,12 @@ function displayScore(){
 
 function reset(){
   let resetButton = document.getElementById("button");
-  resetButton.innerHTML = "Play again?"
-  resetButton.scrollIntoView();
-  resetButton.addEventListener("click", function(){location.reload()});
+  resetButton.innerHTML = "Cong-🐀 🐀  - wanna play again?";
+   resetButton.scrollIntoView();
+  resetButton.addEventListener("click", function(){
+    location.reload();
+    score.scrollIntoView();
+  });
   resetButton.style.visibility = "visible";
 }
 
