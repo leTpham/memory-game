@@ -5,12 +5,30 @@
 const FOUND_MATCH_WAIT_MSECS = 1000;
 
 const IMAGES = [
-   "url(images/cry.jpg)", "url(images/cry.jpg)",
-   "url(images/feline-lawyer.jpg)", "url(images/feline-lawyer.jpg)",
-   "url(images/Smiling-Cat.jpg)", "url(images/Smiling-Cat.jpg)",
-   "url(images/salad-cat.jpeg)", "url(images/salad-cat.jpeg)",
-   "url(images/cheeseburgermeme.jpg)", "url(images/cheeseburgermeme.jpg)",
-   "url(images/cat-vibing.gif)",  "url(images/cat-vibing.gif)"
+  "images/be-afraid-be-very-afraid.gif",
+  "images/cat-lawyer.gif",
+  "images/cat-vibing.gif",
+  "images/chair-cat.gif",
+  "images/dad-cat.gif",
+  "images/keyboard-cat.gif",
+  "images/nailfiling-cat.gif",
+  "images/NNg3sil.gif",
+  "images/omg-cat.gif",
+  "images/pop-cat.gif",
+  "images/salad-cat.gif",
+  "images/wiggle-cat.gif",
+  "images/be-afraid-be-very-afraid.gif",
+  "images/cat-lawyer.gif",
+  "images/cat-vibing.gif",
+  "images/chair-cat.gif",
+  "images/dad-cat.gif",
+  "images/keyboard-cat.gif",
+  "images/nailfiling-cat.gif",
+  "images/NNg3sil.gif",
+  "images/omg-cat.gif",
+  "images/pop-cat.gif",
+  "images/salad-cat.gif",
+  "images/wiggle-cat.gif"
 ];
 
 let count = 0; //count how many cards are flipped at the moment
@@ -53,7 +71,7 @@ function shuffle(items) {
   const gameBoard = document.getElementById("game");
   for (let image of IMAGES) {
     let newDiv = document.createElement("div");
-    newDiv.className = image;
+    newDiv.className = "url(\"" + image +"\")";
     newDiv.addEventListener("click", handleCardClick);
     gameBoard.appendChild(newDiv);
     }
@@ -125,13 +143,12 @@ function checkMatch(){
 
 function displayScore(){
   let matches = document.getElementsByName("matched");
-  let left = 5 - (matches.length/2);
+  let left = (IMAGES.length/2) - (matches.length/2);
   score.innerHTML = left;
   if (left === 0) {
-    score.style.fontSize = "70px"; 
+    score.style.fontSize = "50px"; 
     score.innerHTML = "You did it !!!" ;
     document.body.style.backgroundImage = "url('cat-space.gif')";
-    
     reset();
     }
 }
@@ -139,6 +156,7 @@ function displayScore(){
 function reset(){
   let resetButton = document.getElementById("button");
   resetButton.innerHTML = "Play again?"
+  resetButton.scrollIntoView();
   resetButton.addEventListener("click", function(){location.reload()});
   resetButton.style.visibility = "visible";
 }
