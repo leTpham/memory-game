@@ -137,16 +137,15 @@ function checkMatch(){
 
   count = 0; //since we're unflipping these 2 cards
   }
-  displayScore()
+  displayLeft()
 
 }
 
-function displayScore(){
+function displayLeft(){
   let matches = document.getElementsByName("matched");
   let left = (IMAGES.length/2) - (matches.length/2);
-  score.innerHTML = left;
+  score.innerHTML = "Pairs Left : " + left;
   if (left === 0) {
-    score.style.fontSize = "50px"; 
     document.body.style.backgroundImage = "url('cat-space.gif')";
     reset();
     }
@@ -155,7 +154,7 @@ function displayScore(){
 function reset(){
   let resetButton = document.getElementById("button");
   resetButton.innerHTML = "Cong-🐀 🐀  - wanna play again?";
-   resetButton.scrollIntoView();
+  resetButton.scrollIntoView();
   resetButton.addEventListener("click", function(){
     location.reload();
     score.scrollIntoView();
@@ -163,7 +162,7 @@ function reset(){
   resetButton.style.visibility = "visible";
 }
 
-displayScore()
+displayLeft();
 
 
 
