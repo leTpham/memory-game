@@ -29,11 +29,13 @@ const IMAGES = [
   "images/pop-cat.gif",
   "images/salad-cat.gif",
   "images/wiggle-cat.gif"
+
 ];
+
 
 let count = 0; //count how many cards are flipped at the moment
 
-let score = document.getElementById("score");
+let pairsLeft = document.getElementById("pairsLeft");
 
 let maxFlipped = false; //only allowing 2 cards flipped at a time
 
@@ -144,7 +146,7 @@ function checkMatch(){
 function displayLeft(){
   let matches = document.getElementsByName("matched");
   let left = (IMAGES.length/2) - (matches.length/2);
-  score.innerHTML = "Pairs Left : " + left;
+  pairsLeft.innerHTML = "Pairs Left : " + left;
   if (left === 0) {
     document.body.style.backgroundImage = "url('cat-space.gif')";
     reset();
@@ -157,12 +159,14 @@ function reset(){
   resetButton.scrollIntoView();
   resetButton.addEventListener("click", function(){
     location.reload();
-    score.scrollIntoView();
+    pairsLeft.scrollIntoView();
   });
   resetButton.style.visibility = "visible";
 }
 
 displayLeft();
+
+
 
 
 

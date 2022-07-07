@@ -24,17 +24,18 @@ body {
   opacity: 100%;
 }
 
-h1, #score {
+h1, #pairsLeft {
   font-family: 'Slackey', cursive;
   font-size: 30px;
   text-align: center;
   text-shadow:1px 1px 10px rgb(236, 197, 197), 1px 1px 10px #ccc;
 }
 
-#score {
+#pairsLeft {
   color: rgb(191, 47, 31);
   text-shadow:1px 1px 10px rgba(21, 18, 16, 0.393), 1px 1px 10px rgb(216, 177, 177);
   margin: 20px 20px;
+  font-size: 25px;
   
 }
 
